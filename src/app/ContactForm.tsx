@@ -35,7 +35,7 @@ export default function ContactForm() {
       setTimeout(() => {
         const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "5547999999999";
         const message = encodeURIComponent(
-          `Olá! Sou ${form.name}${form.club ? ` do ${form.club}` : ""}. Preenchi o formulário no site e tenho interesse no Courtida para meu clube.`
+          `Olá! Sou ${form.name}${form.club ? ` do ${form.club}` : ""}. Preenchi o formulário no site e tenho interesse no courtida para meu clube.`
         );
         window.open(`https://wa.me/${whatsappNumber}?text=${message}`, "_blank");
       }, 2000);
@@ -59,7 +59,7 @@ export default function ContactForm() {
           Estamos te redirecionando para o WhatsApp para conversarmos. Se não abrir automaticamente, clique no botão abaixo.
         </p>
         <a
-          href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "5547999999999"}?text=${encodeURIComponent(`Olá! Sou ${form.name}${form.club ? ` do ${form.club}` : ""}. Preenchi o formulário no site e tenho interesse no Courtida.`)}`}
+          href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "5547999999999"}?text=${encodeURIComponent(`Olá! Sou ${form.name}${form.club ? ` do ${form.club}` : ""}. Preenchi o formulário no site e tenho interesse no courtida.`)}`}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 mt-6 px-6 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl transition-colors text-sm font-medium"
@@ -177,7 +177,7 @@ export default function ContactForm() {
           Prefere falar direto?
         </p>
         <a
-          href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "5547999999999"}?text=${encodeURIComponent("Olá! Tenho interesse no Courtida para meu clube.")}`}
+          href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "5547999999999"}?text=${encodeURIComponent("Olá! Tenho interesse no courtida para meu clube.")}`}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 px-6 py-2.5 border border-emerald-500/20 hover:border-emerald-500/40 text-emerald-400 rounded-xl transition-colors text-sm font-medium"

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import ContactForm from "./ContactForm";
 
 export const metadata: Metadata = {
-  title: "Courtida by Preddita — Vídeo, Streaming e Gestão para Esportes de Quadra",
+  title: "courtida by Preddita — Vídeo, Streaming e Gestão para Esportes de Quadra",
   description:
     "Plataforma SaaS de vídeo, streaming ao vivo e gestão inteligente para clubes e esportes de quadra. Reconhecimento facial, transmissão automática e análise de desempenho.",
 };
@@ -11,14 +11,19 @@ function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-[#0A1410]/80 backdrop-blur-md border-b border-white/5">
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0A1410" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <polygon points="5 3 19 12 5 21 5 3" />
-            </svg>
-          </div>
+        <div className="flex items-center gap-2.5">
+          <svg width="34" height="34" viewBox="0 0 68 68" fill="none">
+            <rect width="68" height="68" rx="10" fill="#10B981"/>
+            <rect x="8" y="8" width="52" height="52" rx="2" stroke="#0A1410" strokeWidth="1.2" fill="none"/>
+            <line x1="34" y1="8" x2="34" y2="18" stroke="#0A1410" strokeWidth="1" opacity="0.35"/>
+            <line x1="34" y1="50" x2="34" y2="60" stroke="#0A1410" strokeWidth="1" opacity="0.35"/>
+            <line x1="8" y1="34" x2="18" y2="34" stroke="#0A1410" strokeWidth="1" opacity="0.35"/>
+            <line x1="50" y1="34" x2="60" y2="34" stroke="#0A1410" strokeWidth="1" opacity="0.35"/>
+            <circle cx="34" cy="34" r="16" fill="#FFFFFF"/>
+            <polygon points="29,24 29,44 45,34" fill="#0A1410"/>
+          </svg>
           <span className="text-lg font-semibold tracking-tight text-white">
-            Courtida
+            courtida
           </span>
         </div>
         <nav className="hidden md:flex items-center gap-8 text-sm text-gray-400">
@@ -253,7 +258,7 @@ function CTA() {
       <div className="max-w-2xl mx-auto px-6">
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-            Leve o Courtida para seu clube
+            Leve o courtida para seu clube
           </h2>
           <p className="text-gray-400 text-lg">
             Deixe seu contato e nossa equipe entra em contato para agendar uma
@@ -272,13 +277,18 @@ function Footer() {
     <footer className="py-12 bg-[#050C08] border-t border-white/5">
       <div className="max-w-6xl mx-auto px-6">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-md bg-emerald-500 flex items-center justify-center">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0A1410" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <polygon points="5 3 19 12 5 21 5 3" />
-              </svg>
-            </div>
-            <span className="text-sm font-semibold text-white">Courtida</span>
+          <div className="flex items-center gap-2.5">
+            <svg width="28" height="28" viewBox="0 0 68 68" fill="none">
+              <rect width="68" height="68" rx="10" fill="#10B981"/>
+              <rect x="8" y="8" width="52" height="52" rx="2" stroke="#0A1410" strokeWidth="1.2" fill="none"/>
+              <line x1="34" y1="8" x2="34" y2="18" stroke="#0A1410" strokeWidth="1" opacity="0.35"/>
+              <line x1="34" y1="50" x2="34" y2="60" stroke="#0A1410" strokeWidth="1" opacity="0.35"/>
+              <line x1="8" y1="34" x2="18" y2="34" stroke="#0A1410" strokeWidth="1" opacity="0.35"/>
+              <line x1="50" y1="34" x2="60" y2="34" stroke="#0A1410" strokeWidth="1" opacity="0.35"/>
+              <circle cx="34" cy="34" r="16" fill="#FFFFFF"/>
+              <polygon points="29,24 29,44 45,34" fill="#0A1410"/>
+            </svg>
+            <span className="text-sm font-semibold text-white">courtida</span>
             <span className="text-sm text-gray-600 ml-1">by Preddita</span>
           </div>
           <p className="text-sm text-gray-600">

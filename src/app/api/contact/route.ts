@@ -18,12 +18,12 @@ export async function POST(request: NextRequest) {
 
     // Envia email via Resend
     await resend.emails.send({
-      from: "Courtida <onboarding@resend.dev>",
+      from: "courtida <onboarding@resend.dev>",
       to: process.env.CONTACT_EMAIL!,
-      subject: `Novo lead Courtida: ${name} — ${club || "Sem clube"}`,
+      subject: `Novo lead courtida: ${name} — ${club || "Sem clube"}`,
       html: `
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
-          <h2 style="color: #059669;">Novo interesse no Courtida</h2>
+          <h2 style="color: #059669;">Novo interesse no courtida</h2>
           <table style="width: 100%; border-collapse: collapse;">
             <tr>
               <td style="padding: 8px 12px; border-bottom: 1px solid #e5e7eb; font-weight: bold; width: 140px;">Nome</td>
