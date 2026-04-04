@@ -4,27 +4,25 @@ import { AuthProvider, useAuth } from "@/components/AuthProvider";
 import LoginPage from "@/components/LoginPage";
 
 const menuItems = [
-  { label: "Dashboard", href: "/admin", icon: "grid" },
-  { label: "Clubes", href: "/admin/clubes", icon: "building" },
-  { label: "Quadras", href: "/admin/quadras", icon: "court" },
-  { label: "Jogadores", href: "/admin/jogadores", icon: "users" },
-  { label: "Cameras", href: "/admin/cameras", icon: "camera" },
-  { label: "Dispositivos", href: "/admin/dispositivos", icon: "device" },
-  { label: "Streaming", href: "/admin/streaming", icon: "stream" },
-  { label: "Videos", href: "/admin/videos", icon: "video" },
-  { label: "Configuracoes", href: "/admin/config", icon: "settings" },
+  { label: "Dashboard", href: "/club", icon: "grid" },
+  { label: "Quadras", href: "/club/quadras", icon: "court" },
+  { label: "Jogadores", href: "/club/jogadores", icon: "users" },
+  { label: "Cameras", href: "/club/cameras", icon: "camera" },
+  { label: "Streaming", href: "/club/streaming", icon: "stream" },
+  { label: "Videos", href: "/club/videos", icon: "video" },
+  { label: "Relatorios", href: "/club/relatorios", icon: "chart" },
+  { label: "Configuracoes", href: "/club/config", icon: "settings" },
 ];
 
 function Icon({ name }: { name: string }) {
   const icons: Record<string, React.ReactNode> = {
     grid: <><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /></>,
-    building: <><rect x="4" y="2" width="16" height="20" rx="2" /><line x1="9" y1="6" x2="9" y2="6.01" /><line x1="15" y1="6" x2="15" y2="6.01" /><line x1="9" y1="10" x2="9" y2="10.01" /><line x1="15" y1="10" x2="15" y2="10.01" /><line x1="9" y1="14" x2="9" y2="14.01" /><line x1="15" y1="14" x2="15" y2="14.01" /><line x1="9" y1="22" x2="9" y2="18" /><line x1="15" y1="22" x2="15" y2="18" /></>,
     court: <><rect x="2" y="4" width="20" height="16" rx="2" /><line x1="12" y1="4" x2="12" y2="20" /><line x1="2" y1="12" x2="22" y2="12" /><circle cx="12" cy="12" r="3" /></>,
     users: <><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></>,
     camera: <><path d="M15.6 11.6L22 7v10l-6.4-4.6" /><rect x="2" y="7" width="14" height="10" rx="2" /></>,
-    device: <><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /><path d="M2 12l2-2 2 2" /><path d="M18 12l2-2 2 2" /></>,
     stream: <><circle cx="12" cy="12" r="10" /><polygon points="10 8 16 12 10 16 10 8" /></>,
     video: <><path d="M15.6 11.6L22 7v10l-6.4-4.6" /><rect x="2" y="7" width="14" height="10" rx="2" /></>,
+    chart: <><line x1="18" y1="20" x2="18" y2="10" /><line x1="12" y1="20" x2="12" y2="4" /><line x1="6" y1="20" x2="6" y2="14" /></>,
     settings: <><circle cx="12" cy="12" r="3" /><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" /></>,
   };
   return (
@@ -53,7 +51,7 @@ function Sidebar() {
         </svg>
         <div>
           <span className="text-base font-semibold text-white tracking-tight block">courtida</span>
-          <span className="text-[10px] text-emerald-400 uppercase tracking-wider">Admin</span>
+          <span className="text-[10px] text-amber-400 uppercase tracking-wider">{user.club?.name || "Clube"}</span>
         </div>
       </div>
 
@@ -73,12 +71,12 @@ function Sidebar() {
       <div className="p-4 border-t border-white/5">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3 min-w-0">
-            <div className="w-9 h-9 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-400 text-sm font-semibold shrink-0">
+            <div className="w-9 h-9 rounded-lg bg-amber-500/10 flex items-center justify-center text-amber-400 text-sm font-semibold shrink-0">
               {user.avatar_initials || user.name.substring(0, 2).toUpperCase()}
             </div>
             <div className="min-w-0">
               <p className="text-sm font-medium text-white truncate">{user.name}</p>
-              <p className="text-xs text-emerald-400">Administrador</p>
+              <p className="text-xs text-amber-400">Moderador</p>
             </div>
           </div>
           <button onClick={logout} title="Sair" className="p-2 text-gray-500 hover:text-red-400 transition-colors rounded-lg hover:bg-white/5">
@@ -92,9 +90,9 @@ function Sidebar() {
   );
 }
 
-function AdminContent({ children }: { children: React.ReactNode }) {
+function ClubContent({ children }: { children: React.ReactNode }) {
   const { user } = useAuth();
-  if (!user) return <LoginPage redirectTo="/admin" />;
+  if (!user) return <LoginPage redirectTo="/club" />;
 
   return (
     <div className="min-h-screen bg-[#0A1410]">
@@ -104,10 +102,10 @@ function AdminContent({ children }: { children: React.ReactNode }) {
   );
 }
 
-export default function AdminLayout({ children }: { children: React.ReactNode }) {
+export default function ClubLayout({ children }: { children: React.ReactNode }) {
   return (
-    <AuthProvider requiredRole="admin" loginPath="/admin">
-      <AdminContent>{children}</AdminContent>
+    <AuthProvider requiredRole="moderator" loginPath="/club">
+      <ClubContent>{children}</ClubContent>
     </AuthProvider>
   );
 }
