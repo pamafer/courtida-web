@@ -1,11 +1,11 @@
-import type { Metadata } from "next";
+"use client";
 
-export const metadata: Metadata = {
-  title: "courtida — Painel do Clube",
-  description: "Painel administrativo courtida",
-};
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabase";
+import type { User } from "@supabase/supabase-js";
+import LoginPage from "./login/page";
 
-function Sidebar() {
+function Sidebar({ user, onLogout }: { user: User; onLogout: () => void }) {
   const menuItems = [
     {
       label: "Dashboard",
@@ -111,19 +111,42 @@ function Sidebar() {
         ))}
       </nav>
 
-      {/* Club info */}
+      {/* User info + logout */}
       <div className="p-4 border-t border-white/5">
-        <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-400 text-sm font-semibold">
-            CL
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3 min-w-0">
+            <div className="w-9 h-9 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-400 text-sm font-semibold shrink-0">
+              {user.email?.substring(0, 2).toUpperCase() || "AD"}
+            </div>
+            <div className="min-w-0">
+              <p className="text-sm font-medium text-white truncate">
+                {user.email}
+              </p>
+              <p className="text-xs text-gray-500">Admin</p>
+            </div>
           </div>
-          <div>
-            <p className="text-sm font-medium text-white">Clube Lab</p>
-            <p className="text-xs text-gray-500">Plano Profissional</p>
-          </div>
+          <button
+            onClick={onLogout}
+            title="Sair"
+            className="p-2 text-gray-500 hover:text-red-400 transition-colors rounded-lg hover:bg-white/5"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+              <polyline points="16 17 21 12 16 7" />
+              <line x1="21" y1="12" x2="9" y2="12" />
+            </svg>
+          </button>
         </div>
       </div>
     </aside>
+  );
+}
+
+function LoadingScreen() {
+  return (
+    <div className="min-h-screen bg-[#0A1410] flex items-center justify-center">
+      <div className="w-8 h-8 border-2 border-emerald-500/20 border-t-emerald-500 rounded-full animate-spin" />
+    </div>
   );
 }
 
@@ -132,12 +155,37 @@ export default function AdminLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      setUser(user);
+      setLoading(false);
+    });
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        setUser(session?.user ?? null);
+      }
+    );
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  async function handleLogout() {
+    await supabase.auth.signOut();
+    setUser(null);
+  }
+
+  if (loading) return <LoadingScreen />;
+
+  if (!user) return <LoginPage />;
+
   return (
     <div className="min-h-screen bg-[#0A1410]">
-      <Sidebar />
-      <main className="ml-60 min-h-screen">
-        {children}
-      </main>
+      <Sidebar user={user} onLogout={handleLogout} />
+      <main className="ml-60 min-h-screen">{children}</main>
     </div>
   );
 }
