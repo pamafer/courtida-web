@@ -107,7 +107,10 @@ const faqs = [
 
 function Header() {
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-[#0A1410]/80 backdrop-blur-md border-b border-white/5">
+    <header
+      className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md"
+      style={{ backgroundColor: "color-mix(in srgb, var(--bg-page) 80%, transparent)", borderBottom: "1px solid var(--border-default)" }}
+    >
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         <a href="/" className="flex items-center gap-2.5">
           <svg width="34" height="34" viewBox="0 0 68 68" fill="none">
@@ -120,9 +123,9 @@ function Header() {
             <circle cx="34" cy="34" r="16" fill="#FFFFFF"/>
             <polygon points="29,24 29,44 45,34" fill="#0A1410"/>
           </svg>
-          <span className="text-lg font-semibold tracking-tight text-white">courtida</span>
+          <span className="text-lg font-semibold tracking-tight" style={{ color: "var(--text-primary)" }}>courtida</span>
         </a>
-        <nav className="hidden md:flex items-center gap-8 text-sm text-gray-400">
+        <nav className="hidden md:flex items-center gap-8 text-sm" style={{ color: "var(--text-secondary)" }}>
           <a href="/#funcionalidades" className="hover:text-emerald-400 transition-colors">Funcionalidades</a>
           <a href="/sobre" className="hover:text-emerald-400 transition-colors">Sobre</a>
           <a href="/precos" className="text-emerald-400">Preços</a>
@@ -138,7 +141,7 @@ function Header() {
 
 function Footer() {
   return (
-    <footer className="py-12 bg-[#050C08] border-t border-white/5">
+    <footer className="py-12" style={{ backgroundColor: "var(--bg-surface)", borderTop: "1px solid var(--border-default)" }}>
       <div className="max-w-6xl mx-auto px-6">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-2.5">
@@ -152,11 +155,11 @@ function Footer() {
               <circle cx="34" cy="34" r="16" fill="#FFFFFF"/>
               <polygon points="29,24 29,44 45,34" fill="#0A1410"/>
             </svg>
-            <span className="text-sm font-semibold text-white">courtida</span>
-            <span className="text-sm text-gray-600 ml-1">by Preddita</span>
+            <span className="text-sm font-semibold" style={{ color: "var(--text-primary)" }}>courtida</span>
+            <span className="text-sm ml-1" style={{ color: "var(--text-tertiary)" }}>by Preddita</span>
           </div>
-          <p className="text-sm text-gray-600">Preddita — Automação Inteligente · SC</p>
-          <p className="text-xs text-gray-700">© {new Date().getFullYear()} Preddita. Todos os direitos reservados.</p>
+          <p className="text-sm" style={{ color: "var(--text-tertiary)" }}>Preddita — Automação Inteligente · SC</p>
+          <p className="text-xs" style={{ color: "var(--text-tertiary)" }}>© {new Date().getFullYear()} Preddita. Todos os direitos reservados.</p>
         </div>
       </div>
     </footer>
@@ -165,7 +168,7 @@ function Footer() {
 
 export default function PrecosPage() {
   return (
-    <main className="bg-[#0A1410] text-white antialiased">
+    <main className="antialiased" style={{ backgroundColor: "var(--bg-page)", color: "var(--text-primary)" }}>
       <Header />
 
       {/* Hero */}
@@ -175,12 +178,12 @@ export default function PrecosPage() {
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
             Preços transparentes
           </div>
-          <h1 className="text-4xl sm:text-5xl font-bold text-white leading-[1.1] tracking-tight mb-6">
+          <h1 className="text-4xl sm:text-5xl font-bold leading-[1.1] tracking-tight mb-6" style={{ color: "var(--text-primary)" }}>
             Seu clube ganha junto.
             <br />
             <span className="text-emerald-400">Revenue share real.</span>
           </h1>
-          <p className="text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg max-w-2xl mx-auto leading-relaxed" style={{ color: "var(--text-secondary)" }}>
             Além de tecnologia de ponta, seu clube recebe uma fatia da receita gerada pelos jogadores. Quanto mais seu clube usa, mais ele ganha.
           </p>
         </div>
@@ -192,11 +195,12 @@ export default function PrecosPage() {
           {plans.map((plan) => (
             <div
               key={plan.name}
-              className={`rounded-2xl p-8 flex flex-col ${
+              className={`rounded-2xl p-8 flex flex-col ${plan.highlight ? "relative" : ""}`}
+              style={
                 plan.highlight
-                  ? "border-2 border-emerald-500/40 bg-emerald-500/[0.03] relative"
-                  : "border border-white/5 bg-white/[0.02]"
-              }`}
+                  ? { border: "2px solid rgba(16,185,129,0.4)", backgroundColor: "rgba(16,185,129,0.03)" }
+                  : { backgroundColor: "var(--bg-card)", border: "1px solid var(--border-default)" }
+              }
             >
               {plan.highlight && (
                 <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-emerald-600 text-white text-xs font-medium rounded-full">
@@ -204,21 +208,21 @@ export default function PrecosPage() {
                 </span>
               )}
 
-              <h3 className="text-xl font-semibold text-white mb-1">{plan.name}</h3>
-              <p className="text-sm text-gray-400 mb-6">{plan.description}</p>
+              <h3 className="text-xl font-semibold mb-1" style={{ color: "var(--text-primary)" }}>{plan.name}</h3>
+              <p className="text-sm mb-6" style={{ color: "var(--text-secondary)" }}>{plan.description}</p>
 
               <div className="mb-2">
                 {plan.price === "Sob consulta" ? (
-                  <p className="text-2xl font-bold text-white">Sob consulta</p>
+                  <p className="text-2xl font-bold" style={{ color: "var(--text-primary)" }}>Sob consulta</p>
                 ) : (
                   <div className="flex items-baseline gap-1">
-                    <span className="text-sm text-gray-400">R$</span>
-                    <span className="text-4xl font-bold text-white">{plan.price}</span>
-                    <span className="text-sm text-gray-400">{plan.period}</span>
+                    <span className="text-sm" style={{ color: "var(--text-secondary)" }}>R$</span>
+                    <span className="text-4xl font-bold" style={{ color: "var(--text-primary)" }}>{plan.price}</span>
+                    <span className="text-sm" style={{ color: "var(--text-secondary)" }}>{plan.period}</span>
                   </div>
                 )}
               </div>
-              <p className="text-xs text-gray-500 mb-6">{plan.fidelity}</p>
+              <p className="text-xs mb-6" style={{ color: "var(--text-tertiary)" }}>{plan.fidelity}</p>
 
               <div className="space-y-3 mb-8 flex-1">
                 {plan.features.map((feature) => (
@@ -226,7 +230,7 @@ export default function PrecosPage() {
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#34d399" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 mt-0.5">
                       <polyline points="20 6 9 17 4 12" />
                     </svg>
-                    <span className="text-sm text-gray-300">{feature}</span>
+                    <span className="text-sm" style={{ color: "var(--text-secondary)" }}>{feature}</span>
                   </div>
                 ))}
                 {plan.notIncluded.map((feature) => (
@@ -235,7 +239,7 @@ export default function PrecosPage() {
                       <line x1="18" y1="6" x2="6" y2="18" />
                       <line x1="6" y1="6" x2="18" y2="18" />
                     </svg>
-                    <span className="text-sm text-gray-500">{feature}</span>
+                    <span className="text-sm" style={{ color: "var(--text-tertiary)" }}>{feature}</span>
                   </div>
                 ))}
               </div>
@@ -245,8 +249,13 @@ export default function PrecosPage() {
                 className={`w-full py-3 rounded-xl font-semibold text-center transition-all block ${
                   plan.highlight
                     ? "bg-emerald-600 hover:bg-emerald-500 text-white hover:shadow-lg hover:shadow-emerald-500/20"
-                    : "border border-white/10 hover:border-emerald-500/30 text-gray-300 hover:text-white"
+                    : ""
                 }`}
+                style={
+                  plan.highlight
+                    ? undefined
+                    : { border: "1px solid var(--border-default)", color: "var(--text-secondary)" }
+                }
               >
                 {plan.cta}
               </a>
@@ -256,21 +265,25 @@ export default function PrecosPage() {
       </section>
 
       {/* Preços para jogadores */}
-      <section className="py-20 bg-[#060E0A]">
+      <section className="py-20" style={{ backgroundColor: "var(--bg-surface)" }}>
         <div className="max-w-4xl mx-auto px-6">
-          <h2 className="text-3xl font-bold text-white text-center mb-4">Preços para o jogador</h2>
-          <p className="text-gray-400 text-center mb-12 max-w-xl mx-auto">Valores acessíveis para maximizar adoção. Margens acima de 87% em todos os serviços.</p>
-          <div className="rounded-xl border border-white/5 bg-white/[0.02] overflow-hidden">
-            <div className="grid grid-cols-3 px-5 py-3 border-b border-white/5 text-xs text-gray-500 font-medium uppercase tracking-wide">
+          <h2 className="text-3xl font-bold text-center mb-4" style={{ color: "var(--text-primary)" }}>Preços para o jogador</h2>
+          <p className="text-center mb-12 max-w-xl mx-auto" style={{ color: "var(--text-secondary)" }}>Valores acessíveis para maximizar adoção. Margens acima de 87% em todos os serviços.</p>
+          <div className="rounded-xl overflow-hidden" style={{ backgroundColor: "var(--bg-card)", border: "1px solid var(--border-default)" }}>
+            <div className="grid grid-cols-3 px-5 py-3 text-xs font-medium uppercase tracking-wide" style={{ borderBottom: "1px solid var(--border-default)", color: "var(--text-tertiary)" }}>
               <span>Serviço</span>
               <span>Preço</span>
               <span className="text-right">Margem</span>
             </div>
-            {playerPrices.map((item) => (
-              <div key={item.service} className="grid grid-cols-3 px-5 py-4 border-b border-white/5 last:border-b-0">
-                <span className="text-sm text-white">{item.service}</span>
+            {playerPrices.map((item, i) => (
+              <div
+                key={item.service}
+                className="grid grid-cols-3 px-5 py-4"
+                style={i < playerPrices.length - 1 ? { borderBottom: "1px solid var(--border-default)" } : undefined}
+              >
+                <span className="text-sm" style={{ color: "var(--text-primary)" }}>{item.service}</span>
                 <span className="text-sm text-emerald-400 font-medium">{item.price}</span>
-                <span className="text-sm text-gray-400 text-right">{item.margin}</span>
+                <span className="text-sm text-right" style={{ color: "var(--text-secondary)" }}>{item.margin}</span>
               </div>
             ))}
           </div>
@@ -278,40 +291,40 @@ export default function PrecosPage() {
       </section>
 
       {/* Simulação de receita */}
-      <section className="py-20 bg-[#0A1410]">
+      <section className="py-20" style={{ backgroundColor: "var(--bg-page)" }}>
         <div className="max-w-4xl mx-auto px-6">
-          <h2 className="text-3xl font-bold text-white text-center mb-4">Simulação de receita</h2>
-          <p className="text-gray-400 text-center mb-12 max-w-xl mx-auto">Cenário base: plano Pro, por quadra, com 15 jogadores ativos</p>
+          <h2 className="text-3xl font-bold text-center mb-4" style={{ color: "var(--text-primary)" }}>Simulação de receita</h2>
+          <p className="text-center mb-12 max-w-xl mx-auto" style={{ color: "var(--text-secondary)" }}>Cenário base: plano Pro, por quadra, com 15 jogadores ativos</p>
           <div className="grid sm:grid-cols-2 gap-6 mb-8">
             <div className="p-8 rounded-2xl border border-emerald-500/20 bg-emerald-500/[0.03] text-center">
-              <p className="text-sm text-gray-400 mb-2">O clube recebe por mês</p>
+              <p className="text-sm mb-2" style={{ color: "var(--text-secondary)" }}>O clube recebe por mês</p>
               <p className="text-4xl font-bold text-emerald-400">R$ 509</p>
-              <p className="text-xs text-gray-500 mt-2">por quadra (revenue share 60%)</p>
+              <p className="text-xs mt-2" style={{ color: "var(--text-tertiary)" }}>por quadra (revenue share 60%)</p>
             </div>
-            <div className="p-8 rounded-2xl border border-white/5 bg-white/[0.02] text-center">
-              <p className="text-sm text-gray-400 mb-2">Receita bruta por quadra</p>
-              <p className="text-4xl font-bold text-white">R$ 848</p>
-              <p className="text-xs text-gray-500 mt-2">clips + pacotes + streaming</p>
+            <div className="p-8 rounded-2xl text-center" style={{ backgroundColor: "var(--bg-card)", border: "1px solid var(--border-default)" }}>
+              <p className="text-sm mb-2" style={{ color: "var(--text-secondary)" }}>Receita bruta por quadra</p>
+              <p className="text-4xl font-bold" style={{ color: "var(--text-primary)" }}>R$ 848</p>
+              <p className="text-xs mt-2" style={{ color: "var(--text-tertiary)" }}>clips + pacotes + streaming</p>
             </div>
           </div>
-          <div className="p-6 rounded-xl border border-white/5 bg-white/[0.02]">
-            <p className="text-sm text-gray-400 leading-relaxed">
-              <span className="text-white font-medium">Projeção 10 clubes</span> (2 quadras cada, plano Pro): cada clube recebe aproximadamente R$ 1.018/mês em revenue share. Payback do hardware para quadra de tênis (Pro): ~12 meses. A partir do 13º mês, margem líquida de ~83% sobre a mensalidade.
+          <div className="p-6 rounded-xl" style={{ backgroundColor: "var(--bg-card)", border: "1px solid var(--border-default)" }}>
+            <p className="text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>
+              <span className="font-medium" style={{ color: "var(--text-primary)" }}>Projeção 10 clubes</span> (2 quadras cada, plano Pro): cada clube recebe aproximadamente R$ 1.018/mês em revenue share. Payback do hardware para quadra de tênis (Pro): ~12 meses. A partir do 13º mês, margem líquida de ~83% sobre a mensalidade.
             </p>
           </div>
         </div>
       </section>
 
       {/* FAQ */}
-      <section className="py-20 bg-[#060E0A]">
+      <section className="py-20" style={{ backgroundColor: "var(--bg-surface)" }}>
         <div className="max-w-3xl mx-auto px-6">
-          <h2 className="text-3xl font-bold text-white text-center mb-4">Perguntas frequentes</h2>
-          <p className="text-gray-400 text-center mb-12">Tire suas dúvidas antes de contratar</p>
+          <h2 className="text-3xl font-bold text-center mb-4" style={{ color: "var(--text-primary)" }}>Perguntas frequentes</h2>
+          <p className="text-center mb-12" style={{ color: "var(--text-secondary)" }}>Tire suas dúvidas antes de contratar</p>
           <div className="space-y-4">
             {faqs.map((faq) => (
-              <div key={faq.question} className="p-6 rounded-xl border border-white/5 bg-white/[0.02]">
-                <h3 className="text-base font-semibold text-white mb-2">{faq.question}</h3>
-                <p className="text-sm text-gray-400 leading-relaxed">{faq.answer}</p>
+              <div key={faq.question} className="p-6 rounded-xl" style={{ backgroundColor: "var(--bg-card)", border: "1px solid var(--border-default)" }}>
+                <h3 className="text-base font-semibold mb-2" style={{ color: "var(--text-primary)" }}>{faq.question}</h3>
+                <p className="text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>{faq.answer}</p>
               </div>
             ))}
           </div>
@@ -319,10 +332,10 @@ export default function PrecosPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 bg-[#0A1410]">
+      <section className="py-20" style={{ backgroundColor: "var(--bg-page)" }}>
         <div className="max-w-2xl mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bold text-white mb-4">Pronto para transformar seu clube?</h2>
-          <p className="text-gray-400 mb-8">Agende uma demonstração gratuita e veja o courtida funcionando ao vivo.</p>
+          <h2 className="text-3xl font-bold mb-4" style={{ color: "var(--text-primary)" }}>Pronto para transformar seu clube?</h2>
+          <p className="mb-8" style={{ color: "var(--text-secondary)" }}>Agende uma demonstração gratuita e veja o courtida funcionando ao vivo.</p>
           <a href="/#contato" className="inline-flex px-8 py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-xl transition-all hover:shadow-lg hover:shadow-emerald-500/20">
             Solicitar demonstração
           </a>

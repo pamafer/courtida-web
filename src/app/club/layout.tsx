@@ -37,8 +37,11 @@ function Sidebar() {
   if (!user) return null;
 
   return (
-    <aside className="fixed top-0 left-0 h-screen w-60 bg-[#060E0A] border-r border-white/5 flex flex-col z-40">
-      <div className="h-16 flex items-center gap-2.5 px-5 border-b border-white/5">
+    <aside
+      className="fixed top-0 left-0 h-screen w-60 flex flex-col z-40"
+      style={{ backgroundColor: "var(--bg-sidebar)", borderRight: "1px solid var(--border-default)" }}
+    >
+      <div className="h-16 flex items-center gap-2.5 px-5" style={{ borderBottom: "1px solid var(--border-default)" }}>
         <svg width="28" height="28" viewBox="0 0 68 68" fill="none">
           <rect width="68" height="68" rx="10" fill="#10B981" />
           <rect x="8" y="8" width="52" height="52" rx="2" stroke="#0A1410" strokeWidth="1.2" fill="none" />
@@ -50,7 +53,7 @@ function Sidebar() {
           <polygon points="29,24 29,44 45,34" fill="#0A1410" />
         </svg>
         <div>
-          <span className="text-base font-semibold text-white tracking-tight block">courtida</span>
+          <span className="text-base font-semibold tracking-tight block" style={{ color: "var(--text-primary)" }}>courtida</span>
           <span className="text-[10px] text-amber-400 uppercase tracking-wider">{user.club?.name || "Clube"}</span>
         </div>
       </div>
@@ -60,7 +63,16 @@ function Sidebar() {
           <a
             key={item.label}
             href={item.href}
-            className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-colors"
+            className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors"
+            style={{ color: "var(--text-secondary)" }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.color = "var(--text-primary)";
+              e.currentTarget.style.backgroundColor = "var(--bg-card-hover)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.color = "var(--text-secondary)";
+              e.currentTarget.style.backgroundColor = "transparent";
+            }}
           >
             <Icon name={item.icon} />
             {item.label}
@@ -68,18 +80,31 @@ function Sidebar() {
         ))}
       </nav>
 
-      <div className="p-4 border-t border-white/5">
+      <div className="p-4" style={{ borderTop: "1px solid var(--border-default)" }}>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3 min-w-0">
             <div className="w-9 h-9 rounded-lg bg-amber-500/10 flex items-center justify-center text-amber-400 text-sm font-semibold shrink-0">
               {user.avatar_initials || user.name.substring(0, 2).toUpperCase()}
             </div>
             <div className="min-w-0">
-              <p className="text-sm font-medium text-white truncate">{user.name}</p>
+              <p className="text-sm font-medium truncate" style={{ color: "var(--text-primary)" }}>{user.name}</p>
               <p className="text-xs text-amber-400">Moderador</p>
             </div>
           </div>
-          <button onClick={logout} title="Sair" className="p-2 text-gray-500 hover:text-red-400 transition-colors rounded-lg hover:bg-white/5">
+          <button
+            onClick={logout}
+            title="Sair"
+            className="p-2 transition-colors rounded-lg"
+            style={{ color: "var(--text-tertiary)" }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.color = "#f87171";
+              e.currentTarget.style.backgroundColor = "var(--bg-card-hover)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.color = "var(--text-tertiary)";
+              e.currentTarget.style.backgroundColor = "transparent";
+            }}
+          >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" /><polyline points="16 17 21 12 16 7" /><line x1="21" y1="12" x2="9" y2="12" />
             </svg>
@@ -95,7 +120,7 @@ function ClubContent({ children }: { children: React.ReactNode }) {
   if (!user) return <LoginPage redirectTo="/club" />;
 
   return (
-    <div className="min-h-screen bg-[#0A1410]">
+    <div className="min-h-screen" style={{ backgroundColor: "var(--bg-page)" }}>
       <Sidebar />
       <main className="ml-60 min-h-screen">{children}</main>
     </div>

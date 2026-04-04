@@ -9,7 +9,10 @@ export const metadata: Metadata = {
 
 function Header() {
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-[#0A1410]/80 backdrop-blur-md border-b border-white/5">
+    <header
+      className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md"
+      style={{ backgroundColor: "color-mix(in srgb, var(--bg-page) 80%, transparent)", borderBottom: "1px solid var(--border-default)" }}
+    >
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         <div className="flex items-center gap-2.5">
           <svg width="34" height="34" viewBox="0 0 68 68" fill="none">
@@ -22,11 +25,11 @@ function Header() {
             <circle cx="34" cy="34" r="16" fill="#FFFFFF"/>
             <polygon points="29,24 29,44 45,34" fill="#0A1410"/>
           </svg>
-          <span className="text-lg font-semibold tracking-tight text-white">
+          <span className="text-lg font-semibold tracking-tight" style={{ color: "var(--text-primary)" }}>
             courtida
           </span>
         </div>
-        <nav className="hidden md:flex items-center gap-8 text-sm text-gray-400">
+        <nav className="hidden md:flex items-center gap-8 text-sm" style={{ color: "var(--text-secondary)" }}>
           <a href="#funcionalidades" className="hover:text-emerald-400 transition-colors">
             Funcionalidades
           </a>
@@ -53,7 +56,7 @@ function Header() {
 
 function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0A1410]">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden" style={{ backgroundColor: "var(--bg-page)" }}>
       {/* Grid pattern background */}
       <div
         className="absolute inset-0 opacity-[0.04]"
@@ -72,13 +75,13 @@ function Hero() {
           Plataforma para esportes de quadra
         </div>
 
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white leading-[1.1] tracking-tight mb-6">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-[1.1] tracking-tight mb-6" style={{ color: "var(--text-primary)" }}>
           Cada jogada gravada.
           <br />
           <span className="text-emerald-400">Cada jogo ao vivo.</span>
         </h1>
 
-        <p className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+        <p className="text-lg sm:text-xl max-w-2xl mx-auto mb-10 leading-relaxed" style={{ color: "var(--text-secondary)" }}>
           Vídeo inteligente, streaming automático e reconhecimento facial
           integrados em uma única plataforma para seu clube.
         </p>
@@ -92,7 +95,8 @@ function Hero() {
           </a>
           <a
             href="#como-funciona"
-            className="w-full sm:w-auto px-8 py-3.5 border border-white/10 hover:border-emerald-500/30 text-gray-300 hover:text-white font-medium rounded-xl transition-all text-center"
+            className="w-full sm:w-auto px-8 py-3.5 font-medium rounded-xl transition-all text-center"
+            style={{ border: "1px solid var(--border-default)", color: "var(--text-secondary)" }}
           >
             Como funciona
           </a>
@@ -109,7 +113,7 @@ function Hero() {
               <div className="text-2xl sm:text-3xl font-bold text-emerald-400">
                 {stat.value}
               </div>
-              <div className="text-xs sm:text-sm text-gray-500 mt-1">
+              <div className="text-xs sm:text-sm mt-1" style={{ color: "var(--text-tertiary)" }}>
                 {stat.label}
               </div>
             </div>
@@ -160,13 +164,13 @@ const features = [
 
 function Features() {
   return (
-    <section id="funcionalidades" className="py-24 bg-[#060E0A]">
+    <section id="funcionalidades" className="py-24" style={{ backgroundColor: "var(--bg-surface)" }}>
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4" style={{ color: "var(--text-primary)" }}>
             Tudo que seu clube precisa
           </h2>
-          <p className="text-gray-400 text-lg max-w-xl mx-auto">
+          <p className="text-lg max-w-xl mx-auto" style={{ color: "var(--text-secondary)" }}>
             Três pilares integrados em uma plataforma única
           </p>
         </div>
@@ -175,15 +179,24 @@ function Features() {
           {features.map((feature) => (
             <div
               key={feature.title}
-              className="group relative p-8 rounded-2xl border border-white/5 bg-white/[0.02] hover:border-emerald-500/20 hover:bg-emerald-500/[0.03] transition-all duration-300"
+              className="group relative p-8 rounded-2xl transition-all duration-300"
+              style={{ backgroundColor: "var(--bg-card)", border: "1px solid var(--border-default)" }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = "rgba(16,185,129,0.2)";
+                e.currentTarget.style.backgroundColor = "var(--bg-card-hover)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = "var(--border-default)";
+                e.currentTarget.style.backgroundColor = "var(--bg-card)";
+              }}
             >
               <div className="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 mb-5">
                 {feature.icon}
               </div>
-              <h3 className="text-xl font-semibold text-white mb-3">
+              <h3 className="text-xl font-semibold mb-3" style={{ color: "var(--text-primary)" }}>
                 {feature.title}
               </h3>
-              <p className="text-gray-400 leading-relaxed text-[15px]">
+              <p className="leading-relaxed text-[15px]" style={{ color: "var(--text-secondary)" }}>
                 {feature.description}
               </p>
             </div>
@@ -219,13 +232,13 @@ const steps = [
 
 function HowItWorks() {
   return (
-    <section id="como-funciona" className="py-24 bg-[#0A1410]">
+    <section id="como-funciona" className="py-24" style={{ backgroundColor: "var(--bg-page)" }}>
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4" style={{ color: "var(--text-primary)" }}>
             Como funciona
           </h2>
-          <p className="text-gray-400 text-lg max-w-xl mx-auto">
+          <p className="text-lg max-w-xl mx-auto" style={{ color: "var(--text-secondary)" }}>
             Do zero ao funcionamento em menos de uma semana
           </p>
         </div>
@@ -236,14 +249,17 @@ function HowItWorks() {
               {i < steps.length - 1 && (
                 <div className="hidden lg:block absolute top-8 left-[calc(100%+0.25rem)] w-[calc(100%-3.5rem)] h-px border-t border-dashed border-emerald-500/20" />
               )}
-              <div className="p-6 rounded-2xl border border-white/5 bg-white/[0.02] h-full flex flex-col">
+              <div
+                className="p-6 rounded-2xl h-full flex flex-col"
+                style={{ backgroundColor: "var(--bg-card)", border: "1px solid var(--border-default)" }}
+              >
                 <span className="text-3xl font-bold text-emerald-500/20">
                   {step.number}
                 </span>
-                <h3 className="text-lg font-semibold text-white mt-3 mb-2">
+                <h3 className="text-lg font-semibold mt-3 mb-2" style={{ color: "var(--text-primary)" }}>
                   {step.title}
                 </h3>
-                <p className="text-gray-400 text-sm leading-relaxed flex-1">
+                <p className="text-sm leading-relaxed flex-1" style={{ color: "var(--text-secondary)" }}>
                   {step.description}
                 </p>
               </div>
@@ -257,13 +273,13 @@ function HowItWorks() {
 
 function CTA() {
   return (
-    <section id="contato" className="py-24 bg-[#060E0A]">
+    <section id="contato" className="py-24" style={{ backgroundColor: "var(--bg-surface)" }}>
       <div className="max-w-2xl mx-auto px-6">
         <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4" style={{ color: "var(--text-primary)" }}>
             Leve o courtida para seu clube
           </h2>
-          <p className="text-gray-400 text-lg">
+          <p className="text-lg" style={{ color: "var(--text-secondary)" }}>
             Deixe seu contato e nossa equipe entra em contato para agendar uma
             demonstração gratuita.
           </p>
@@ -277,7 +293,7 @@ function CTA() {
 
 function Footer() {
   return (
-    <footer className="py-12 bg-[#050C08] border-t border-white/5">
+    <footer className="py-12" style={{ backgroundColor: "var(--bg-surface)", borderTop: "1px solid var(--border-default)" }}>
       <div className="max-w-6xl mx-auto px-6">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-2.5">
@@ -291,13 +307,13 @@ function Footer() {
               <circle cx="34" cy="34" r="16" fill="#FFFFFF"/>
               <polygon points="29,24 29,44 45,34" fill="#0A1410"/>
             </svg>
-            <span className="text-sm font-semibold text-white">courtida</span>
-            <span className="text-sm text-gray-600 ml-1">by Preddita</span>
+            <span className="text-sm font-semibold" style={{ color: "var(--text-primary)" }}>courtida</span>
+            <span className="text-sm ml-1" style={{ color: "var(--text-tertiary)" }}>by Preddita</span>
           </div>
-          <p className="text-sm text-gray-600">
+          <p className="text-sm" style={{ color: "var(--text-tertiary)" }}>
             Preddita — Automação Inteligente · SC
           </p>
-          <p className="text-xs text-gray-700">
+          <p className="text-xs" style={{ color: "var(--text-tertiary)" }}>
             © {new Date().getFullYear()} Preddita. Todos os direitos reservados.
           </p>
         </div>
@@ -308,7 +324,7 @@ function Footer() {
 
 export default function Home() {
   return (
-    <main className="bg-[#0A1410] text-white antialiased">
+    <main className="antialiased" style={{ backgroundColor: "var(--bg-page)", color: "var(--text-primary)" }}>
       <Header />
       <Hero />
       <Features />

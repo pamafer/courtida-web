@@ -29,12 +29,16 @@ function BottomNav() {
   if (!user) return null;
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-[#060E0A] border-t border-white/5 z-40 px-4 py-2 flex items-center justify-around">
+    <nav
+      className="fixed bottom-0 left-0 right-0 z-40 px-4 py-2 flex items-center justify-around"
+      style={{ backgroundColor: "var(--bg-sidebar)", borderTop: "1px solid var(--border-default)" }}
+    >
       {menuItems.map((item) => (
         <a
           key={item.label}
           href={item.href}
-          className="flex flex-col items-center gap-1 py-1 px-3 text-gray-400 hover:text-emerald-400 transition-colors"
+          className="flex flex-col items-center gap-1 py-1 px-3 hover:text-emerald-400 transition-colors"
+          style={{ color: "var(--text-secondary)" }}
         >
           <Icon name={item.icon} />
           <span className="text-[10px] font-medium">{item.label}</span>
@@ -49,7 +53,10 @@ function TopBar() {
   if (!user) return null;
 
   return (
-    <header className="fixed top-0 left-0 right-0 bg-[#060E0A] border-b border-white/5 z-40 px-4 h-14 flex items-center justify-between">
+    <header
+      className="fixed top-0 left-0 right-0 z-40 px-4 h-14 flex items-center justify-between"
+      style={{ backgroundColor: "var(--bg-sidebar)", borderBottom: "1px solid var(--border-default)" }}
+    >
       <div className="flex items-center gap-2">
         <svg width="24" height="24" viewBox="0 0 68 68" fill="none">
           <rect width="68" height="68" rx="10" fill="#10B981" />
@@ -61,11 +68,17 @@ function TopBar() {
           <circle cx="34" cy="34" r="16" fill="#FFFFFF" />
           <polygon points="29,24 29,44 45,34" fill="#0A1410" />
         </svg>
-        <span className="text-sm font-semibold text-white">courtida</span>
+        <span className="text-sm font-semibold" style={{ color: "var(--text-primary)" }}>courtida</span>
       </div>
       <div className="flex items-center gap-3">
-        <span className="text-xs text-gray-400">{user.name}</span>
-        <button onClick={logout} className="p-2 text-gray-500 hover:text-red-400 transition-colors">
+        <span className="text-xs" style={{ color: "var(--text-secondary)" }}>{user.name}</span>
+        <button
+          onClick={logout}
+          className="p-2 transition-colors"
+          style={{ color: "var(--text-tertiary)" }}
+          onMouseEnter={(e) => { e.currentTarget.style.color = "#f87171"; }}
+          onMouseLeave={(e) => { e.currentTarget.style.color = "var(--text-tertiary)"; }}
+        >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
             <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" /><polyline points="16 17 21 12 16 7" /><line x1="21" y1="12" x2="9" y2="12" />
           </svg>
@@ -80,7 +93,7 @@ function AppContent({ children }: { children: React.ReactNode }) {
   if (!user) return <LoginPage redirectTo="/app" />;
 
   return (
-    <div className="min-h-screen bg-[#0A1410]">
+    <div className="min-h-screen" style={{ backgroundColor: "var(--bg-page)" }}>
       <TopBar />
       <main className="pt-14 pb-20 min-h-screen">{children}</main>
       <BottomNav />

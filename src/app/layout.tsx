@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="pt-BR" className={`${geist.variable} dark`} suppressHydrationWarning>
-      <body className="font-[family-name:var(--font-geist)] antialiased">
+      <body className="font-[family-name:var(--font-geist)] antialiased" style={{ backgroundColor: "var(--bg-page)", color: "var(--text-primary)" }}>
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
