@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist } from "next/font/google";
 import "./globals.css";
 
@@ -7,9 +7,67 @@ const geist = Geist({
   variable: "--font-geist",
 });
 
+export const viewport: Viewport = {
+  themeColor: "#0A1410",
+  width: "device-width",
+  initialScale: 1,
+};
+
 export const metadata: Metadata = {
-  title: "Courtida by Preddita",
-  description: "Vídeo, Streaming e Gestão para Esportes de Quadra",
+  metadataBase: new URL("https://courtida.com"),
+  title: {
+    default: "courtida — Vídeo, Streaming e Gestão para Esportes de Quadra",
+    template: "%s | courtida",
+  },
+  description:
+    "Plataforma SaaS de vídeo, streaming ao vivo e gestão inteligente para clubes e esportes de quadra. Reconhecimento facial, transmissão automática e análise de desempenho.",
+  keywords: [
+    "esportes de quadra",
+    "streaming esportivo",
+    "gravação de jogos",
+    "reconhecimento facial esporte",
+    "gestão de clube esportivo",
+    "beach tennis",
+    "padel",
+    "tênis",
+    "plataforma para clubes",
+    "vídeo esportivo",
+    "courtida",
+    "preddita",
+  ],
+  authors: [{ name: "Preddita", url: "https://courtida.com" }],
+  creator: "Preddita — Automação Inteligente",
+  publisher: "Preddita",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  openGraph: {
+    type: "website",
+    locale: "pt_BR",
+    url: "https://courtida.com",
+    siteName: "courtida",
+    title: "courtida — Vídeo, Streaming e Gestão para Esportes de Quadra",
+    description:
+      "Gravação inteligente, streaming ao vivo e reconhecimento facial integrados em uma única plataforma para seu clube.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "courtida — Vídeo, Streaming e Gestão para Esportes de Quadra",
+    description:
+      "Gravação inteligente, streaming ao vivo e reconhecimento facial integrados em uma única plataforma para seu clube.",
+  },
+  alternates: {
+    canonical: "https://courtida.com",
+  },
+  category: "technology",
 };
 
 export default function RootLayout({
