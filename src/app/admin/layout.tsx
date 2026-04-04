@@ -51,8 +51,8 @@ function Sidebar() {
           <circle cx="34" cy="34" r="16" fill="#FFFFFF" />
           <polygon points="29,24 29,44 45,34" fill="#0A1410" />
         </svg>
-        <div>
-          <span className="text-base font-semibold text-white tracking-tight block">courtida</span>
+        <div className="flex items-baseline gap-2">
+          <span className="text-base font-semibold text-white tracking-tight">courtida</span>
           <span className="text-[10px] text-emerald-400 uppercase tracking-wider">Admin</span>
         </div>
       </div>
