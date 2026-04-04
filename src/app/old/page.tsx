@@ -30,11 +30,8 @@ function Header() {
           <a href="#funcionalidades" className="hover:text-emerald-400 transition-colors">
             Funcionalidades
           </a>
-          <a href="/sobre" className="hover:text-emerald-400 transition-colors">
-            Sobre
-          </a>
-          <a href="/precos" className="hover:text-emerald-400 transition-colors">
-            Preços
+          <a href="#como-funciona" className="hover:text-emerald-400 transition-colors">
+            Como funciona
           </a>
           <a href="#contato" className="hover:text-emerald-400 transition-colors">
             Contato
