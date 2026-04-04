@@ -13,15 +13,41 @@
   --color-emerald-900: #064e3b;
 }
 
-html {
-  scroll-behavior: smooth;
+:root {
+  --bg-page: #0A1410;
+  --bg-surface: #060E0A;
+  --bg-card: rgba(255,255,255,0.02);
+  --bg-card-hover: rgba(255,255,255,0.04);
+  --bg-input: rgba(255,255,255,0.05);
+  --bg-select: #0D1B14;
+  --bg-sidebar: #060E0A;
+  --bg-modal: #0D1B14;
+  --border-default: rgba(255,255,255,0.05);
+  --border-hover: rgba(255,255,255,0.10);
+  --text-primary: #FFFFFF;
+  --text-secondary: #9CA3AF;
+  --text-tertiary: #6B7280;
+  --text-placeholder: #374151;
 }
 
-body {
-  background-color: #0a1410;
+.light {
+  --bg-page: #F8FAFB;
+  --bg-surface: #FFFFFF;
+  --bg-card: rgba(0,0,0,0.02);
+  --bg-card-hover: rgba(0,0,0,0.04);
+  --bg-input: rgba(0,0,0,0.03);
+  --bg-select: #FFFFFF;
+  --bg-sidebar: #FFFFFF;
+  --bg-modal: #FFFFFF;
+  --border-default: rgba(0,0,0,0.08);
+  --border-hover: rgba(0,0,0,0.15);
+  --text-primary: #111827;
+  --text-secondary: #6B7280;
+  --text-tertiary: #9CA3AF;
+  --text-placeholder: #D1D5DB;
 }
 
-::selection {
-  background-color: rgba(16, 185, 129, 0.3);
-  color: white;
-}
+html { scroll-behavior: smooth; }
+body { background-color: var(--bg-page); color: var(--text-primary); }
+::selection { background-color: rgba(16,185,129,0.3); color: white; }
+select option { background-color: var(--bg-select); color: var(--text-primary); }
