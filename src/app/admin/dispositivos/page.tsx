@@ -44,7 +44,7 @@ function CopyButton({ text }: { text: string }) {
     setTimeout(() => setCopied(false), 2000);
   }
   return (
-    <button onClick={handleCopy} title="Copiar token" className="p-1 rounded transition-colors" style={{ color: copied ? "#34d399" : "var(--text-tertiary)" }}>
+    <button onClick={handleCopy} title="Copiar" className="p-1 rounded transition-colors" style={{ color: copied ? "#34d399" : "var(--text-tertiary)" }}>
       {copied ? (
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
       ) : (
@@ -230,7 +230,6 @@ export default function AdminDispositivosPage() {
           <div className="relative w-full max-w-lg p-6 rounded-2xl shadow-2xl" style={{ backgroundColor: "var(--bg-modal)", border: "1px solid var(--border-default)" }}>
             <h3 className="text-lg font-semibold mb-1" style={{ color: "var(--text-primary)" }}>{showToken.name}</h3>
             <p className="text-sm mb-5" style={{ color: "var(--text-secondary)" }}>Configuração do webhook para este dispositivo</p>
-
             <div className="space-y-4">
               <div>
                 <label className="block text-xs font-medium mb-1.5" style={{ color: "var(--text-tertiary)" }}>TOKEN</label>
@@ -239,7 +238,6 @@ export default function AdminDispositivosPage() {
                   <CopyButton text={showToken.token} />
                 </div>
               </div>
-
               <div>
                 <label className="block text-xs font-medium mb-1.5" style={{ color: "var(--text-tertiary)" }}>URL DO WEBHOOK</label>
                 <div className="flex items-center gap-2 p-3 rounded-xl font-mono text-xs" style={{ backgroundColor: "var(--bg-input)", border: "1px solid var(--border-hover)", color: "var(--text-primary)" }}>
@@ -247,7 +245,6 @@ export default function AdminDispositivosPage() {
                   <CopyButton text={`https://courtida.com/api/controlid/webhook?token=${showToken.token}`} />
                 </div>
               </div>
-
               <div>
                 <label className="block text-xs font-medium mb-1.5" style={{ color: "var(--text-tertiary)" }}>CONFIGURAR NO IDFACE (CURL)</label>
                 <div className="p-3 rounded-xl font-mono text-xs leading-relaxed" style={{ backgroundColor: "var(--bg-input)", border: "1px solid var(--border-hover)", color: "var(--text-secondary)" }}>
@@ -256,14 +253,9 @@ export default function AdminDispositivosPage() {
                 </div>
               </div>
             </div>
-
             <div className="flex gap-3 mt-6">
-              <button onClick={() => handleRegenToken(showToken)} className="flex-1 py-2.5 rounded-xl text-sm font-medium text-amber-400" style={{ border: "1px solid rgba(245,158,11,0.3)" }}>
-                Regenerar token
-              </button>
-              <button onClick={() => setShowToken(null)} className="flex-1 py-2.5 rounded-xl text-sm font-medium" style={{ color: "var(--text-secondary)", border: "1px solid var(--border-hover)" }}>
-                Fechar
-              </button>
+              <button onClick={() => handleRegenToken(showToken)} className="flex-1 py-2.5 rounded-xl text-sm font-medium text-amber-400" style={{ border: "1px solid rgba(245,158,11,0.3)" }}>Regenerar token</button>
+              <button onClick={() => setShowToken(null)} className="flex-1 py-2.5 rounded-xl text-sm font-medium" style={{ color: "var(--text-secondary)", border: "1px solid var(--border-hover)" }}>Fechar</button>
             </div>
           </div>
         </div>
@@ -317,9 +309,7 @@ function DeviceForm({ device, clubs, courts, onClose, onSuccess }: { device: Acc
     e.preventDefault();
     setSaving(true);
     setError("");
-
     if (!form.name.trim()) { setError("Nome do dispositivo é obrigatório."); setSaving(false); return; }
-
     const payload = {
       name: form.name.trim(),
       model: form.model.trim() || "IDFace",
@@ -328,13 +318,11 @@ function DeviceForm({ device, clubs, courts, onClose, onSuccess }: { device: Acc
       club_id: form.club_id || null,
       court_id: form.court_id || null,
     };
-
     try {
       if (isEditing) {
         const { error: e } = await supabase.from("access_devices").update(payload).eq("id", device!.id);
         if (e) throw e;
       } else {
-        // Token é gerado automaticamente pelo banco (gen_random_uuid())
         const { error: e } = await supabase.from("access_devices").insert({ ...payload, is_active: true, is_online: false });
         if (e) throw e;
       }
@@ -376,7 +364,6 @@ function DeviceForm({ device, clubs, courts, onClose, onSuccess }: { device: Acc
                 </select>
               </div>
             </div>
-
             <div className="grid sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm mb-1.5" style={{ color: "var(--text-secondary)" }}>Endereço IP</label>
@@ -387,7 +374,6 @@ function DeviceForm({ device, clubs, courts, onClose, onSuccess }: { device: Acc
                 <input type="text" name="location" value={form.location} onChange={handleChange} placeholder="Entrada principal" className={ic} style={ist} />
               </div>
             </div>
-
             <div className="grid sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm mb-1.5" style={{ color: "var(--text-secondary)" }}>Clube</label>
@@ -416,16 +402,13 @@ function DeviceForm({ device, clubs, courts, onClose, onSuccess }: { device: Acc
                 )}
               </div>
             </div>
-
             {isEditing && (
               <div className="p-4 rounded-xl" style={{ backgroundColor: "var(--bg-input)", border: "1px solid var(--border-hover)" }}>
                 <p className="text-xs font-medium mb-1" style={{ color: "var(--text-tertiary)" }}>TOKEN DO DISPOSITIVO</p>
                 <p className="text-sm font-mono break-all" style={{ color: "var(--text-secondary)" }}>{device!.token}</p>
               </div>
             )}
-
             {error && <div className="p-3 rounded-lg bg-red-500/10 border border-red-500/20"><p className="text-sm text-red-400">{error}</p></div>}
-
             <div className="flex gap-3 pt-2">
               <button type="button" onClick={onClose} className="flex-1 py-3 rounded-xl text-sm font-medium transition-colors" style={{ color: "var(--text-secondary)", border: "1px solid var(--border-hover)" }}>Cancelar</button>
               <button type="submit" disabled={saving} className="flex-1 py-3 bg-emerald-600 hover:bg-emerald-500 disabled:bg-emerald-800 text-white font-semibold rounded-xl transition-all hover:shadow-lg hover:shadow-emerald-500/20">{saving ? "Salvando..." : isEditing ? "Salvar alterações" : "Criar dispositivo"}</button>
